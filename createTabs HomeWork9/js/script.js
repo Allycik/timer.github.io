@@ -2,6 +2,8 @@ window.addEventListener("DOMContentLoaded", function(){
 
     'use strict';
 
+    // tab
+
     let tab = document.querySelectorAll(".info-header-tab"),
         info = document.querySelector(".info-header"),
         tabContent = document.querySelectorAll(".info-tabcontent");
@@ -33,6 +35,51 @@ window.addEventListener("DOMContentLoaded", function(){
                  }
              }
          }
+
+            // timer\
+
+         let deadLine = '2020-10-18';
+        
+         function getTimeRemaining (endtime){
+             let t = Date.parse(endtime) - Date.parse(new Date()),// метод parse () превращает любую дату в кол-во миллисекунд начиная с 1 января 1970г;
+                 seconds = Math.floor((t/1000) % 60),// получили секунды 
+                 minutes = Math.floor((t/1000/60) % 60),
+                 hours = Math.floor((t/(1000*60*60)));
+                //  hours = Math.floor((t /1000*60*60) % 24),// если хотим найти дни
+                //  days = Math.floor((t / (1000*60*60*24)));// если хотим найти дни 
+
+                return {
+                    'total':t,
+                    'hours': hours,
+                    'minutes': minutes,
+                    'seconds': seconds
+                };
+            }
+
+            function setClock (id, endtime){
+                let timer = document.getElementById(id),
+                    hours = timer.querySelector(".hours"),
+                    minutes = timer.querySelector(".minutes"),
+                    seconds = timer.querySelector(".seconds"),
+                    timeInterval = setInterval(updateClock,1000);
+            
+
+            function updateClock(){
+                let t = getTimeRemaining(endtime);
+                hours.textContent = t.hours;
+                minutes.textContent = t.minutes;
+                seconds.textContent = t.seconds;
+
+                if (t.total <= 0){
+                 clearInterval(timeInterval);
+                }
+        
+            }
+        }
+        
+            setClock("timer", deadLine);
+
+    
         });
 
 
