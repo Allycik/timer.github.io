@@ -38,11 +38,11 @@ window.addEventListener("DOMContentLoaded", function(){
 
             // timer\
 
-         let deadLine = '2020-10-18';
+         let deadLine = '2020-08-13';
         
          function getTimeRemaining (endtime){
              let t = Date.parse(endtime) - Date.parse(new Date()),// метод parse () превращает любую дату в кол-во миллисекунд начиная с 1 января 1970г;
-                 seconds = Math.floor((t/1000) % 60),// получили секунды 
+                 seconds = Math.floor((t/1000) % 60),
                  minutes = Math.floor((t/1000/60) % 60),
                  hours = Math.floor((t/(1000*60*60)));
                 //  hours = Math.floor((t /1000*60*60) % 24),// если хотим найти дни
@@ -52,7 +52,8 @@ window.addEventListener("DOMContentLoaded", function(){
                     'total':t,
                     'hours': hours,
                     'minutes': minutes,
-                    'seconds': seconds
+                    'seconds': seconds,
+                    'zero': "00"
                 };
             }
 
@@ -66,11 +67,22 @@ window.addEventListener("DOMContentLoaded", function(){
 
             function updateClock(){
                 let t = getTimeRemaining(endtime);
-                hours.textContent = t.hours;
-                minutes.textContent = t.minutes;
-                seconds.textContent = t.seconds;
+
+                function beforeZerro (num){
+                    if (num <= 9) {
+                     return '0' + num;
+                    } else {
+                        return num;
+                    }
+                };
+                hours.textContent = beforeZerro(t.hours);
+                minutes.textContent = beforeZerro(t.minutes);
+                seconds.textContent = beforeZerro(t.seconds);
 
                 if (t.total <= 0){
+                 hours.textContent = t.zero;
+                 minutes.textContent = t.zero;
+                 seconds.textContent = t.zero;
                  clearInterval(timeInterval);
                 }
         
@@ -78,8 +90,6 @@ window.addEventListener("DOMContentLoaded", function(){
         }
         
             setClock("timer", deadLine);
-
-    
         });
 
 
