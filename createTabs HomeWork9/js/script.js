@@ -93,8 +93,51 @@ window.addEventListener("DOMContentLoaded", function(){
         });
 
 
+    // modal 
+
+    let more = document.querySelector(".more"),
+        overlay = document.querySelector(".overlay"),
+        close = document.querySelector(".popup-close");
+
+        more.addEventListener("click", function(){
+            overlay.style.display ="block";
+            this.classList.add("more-splash");
+            document.body.style.overflow = 'hidden';//запретили прокрутку страницы как только открывается модальное окно
+        });
+         close.addEventListener("click", function(){
+             overlay.style.display = "none";
+             more.classList.remove("more-splash");
+             document.body.style.overflow = '';// сняли запрет на прокрутку окна
+         });
+             
+        const descriptBtn = document.querySelectorAll(".description-btn");//привязали модальное окно к кнопкам - "Узнать подробнее "
+
+          descriptBtn.forEach(function (btn){
+              btn.addEventListener("click", function(){
+                  overlay.style.display = "block";
+              })
+          
+        });
+
+        
+            
 
 
 
 
-});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    });
+
